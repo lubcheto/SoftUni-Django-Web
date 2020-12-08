@@ -1,0 +1,44 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+
+{% block site_content %}
+    <h1>MEALS LIST</h1>
+    <div class='container' style='padding-top: 10px'>
+        {% for meal in meals %}
+            <div class="col-lg-4">
+
+                <div class="card card-outline-primary mb-3 text-center" style="width: 100%;">
+
+                    <img src="{{ meal.image.url }}" class="card-img-top"
+                         style="width:100%" alt="Image">
+                    <div class="card-body">
+                        <h5 class="card-title">NAME: {{ meal.name }} </h5>
+                        <p class="card-text">PRICE: {{ meal.price }}</p>
+                        <a href="" class="btn btn-primary">See details</a>
+
+                    </div>
+
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+
+    <div class='container'>
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Prev</a>
+            {{ page_obj.previous_page_number }}
+        {% else %}
+            <a disabled="disabled"></a>
+        {% endif %}
+        {{ page_obj.number }}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            {{ page_obj.next_page_number }}
+            <a disabled="disabled"></a>
+        {% endif %}
+    </div>
+
+
+{% endblock %}
