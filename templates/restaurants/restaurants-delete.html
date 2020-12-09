@@ -1,0 +1,42 @@
+
+
+
+{% extends 'shared/base.html' %}
+{% load bootstrap_form_register_or_login %}
+{% load label_with_classes %}
+
+
+{% load static %}
+{% block site_content %}
+
+    <h1 class="text-center"></h1>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <form method="post">{% csrf_token %}
+                <h1 class="text-center">Are you sure you want to delete: </h1>
+
+                <h2 class="text-center">{{ restaurants.restaurant_name }} ?</h2>
+
+
+                <input class="form-control  btn btn-danger" type="submit" value="Confirm">
+                <br>
+                <br>
+                <br>
+                <br>
+                <a href="{% url 'restaurants details' user.userprofile.id %}">
+                    <input class="form-control  btn btn-primary" type="button" value="Take me back"/>
+                </a>
+
+            </form>
+
+
+        </div>
+
+        <div class="col-lg-3"></div>
+    </div>
+
+
+
+
+{% endblock %}

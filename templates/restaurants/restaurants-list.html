@@ -7,19 +7,21 @@
     <div class='container' style='padding-top: 10px'>
         {% for restaurant in restaurants %}
             <div class="col-lg-4">
+                <a href="{% url 'restaurants details' restaurant.id %}">
+                    <div class="card card-outline-primary mb-3 text-center" style="width: 100%;">
 
-                <div class="card card-outline-primary mb-3 text-center" style="width: 100%;">
+                        <img src="{{ restaurant.profile_picture.url }}" class="card-img-top"
+                             style="width:100%" alt="img">
 
-                    <img src="{{ restaurant.image.url }}" class="card-img-top"
-                         style="width:100%" alt="Image">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ restaurant.name }} </h5>
-                        <p class="card-text">{{ restaurant.description }}</p>
-                        <a href="" class="btn btn-primary">See details</a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ restaurant.restaurant_name }} </h5>
 
+                            <p class="card-text">{{ restaurant.description }}</p>
+
+
+                        </div>
                     </div>
-
-                </div>
+                </a>
             </div>
 
         {% endfor %}

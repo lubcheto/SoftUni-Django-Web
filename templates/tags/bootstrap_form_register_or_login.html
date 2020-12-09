@@ -1,0 +1,13 @@
+
+
+
+
+<form action="{{ action }}" method="{{ method }}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <br>
+    <button class = 'btn btn-success'>Log in</button>
+
+    <a href="{% url 'register user' %}" class = 'btn btn-primary pull-right'>Register</a>
+
+</form>

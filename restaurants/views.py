@@ -1,10 +1,8 @@
-from django.shortcuts import render
-
 # Create your views here.
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, FormView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
-from restaurants.forms import RestaurantCreateForm
+from accounts.forms import RestaurantEditForm
 from restaurants.models import Restaurants
 
 
@@ -29,7 +27,40 @@ class RestaurantsListView(ListView):
 
 class RestaurantsCreateView(CreateView):
     model = Restaurants
-    fields = '__all__'
+    fields = ['restaurant_name', 'description','profile_picture']
     template_name = 'restaurants/restaurants-create.html'
     success_url = reverse_lazy('restaurants list')
+
+
+
+
+class RestaurantsDetailsView(DetailView):  # requires PK
+    model = Restaurants
+    template_name = 'restaurants/restaurants-details.html'
+    context_object_name = 'restaurant'  # promenqme naming of the variable from object to pet like in listview
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['can_edit'] = (self.request.user.id == self.object.user_id)
+        context['can_delete'] = (self.request.user.id == self.object.user_id)
+
+        return context
+
+
+class RestaurantEditView(UpdateView):
+    model = Restaurants
+    form_class = RestaurantEditForm
+    template_name = 'restaurants/restaurants-edit.html'
+    success_url = f'/restaurants/list/'
+
+
+class RestaurantDeleteView(DeleteView):
+    model = Restaurants
+    template_name = 'restaurants/restaurants-delete.html'
+    success_url = f'/restaurants/list/'
+
+
+
+
 

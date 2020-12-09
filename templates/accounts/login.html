@@ -1,5 +1,5 @@
 {% extends 'shared/base.html' %}
-{% load bootstrap_form %}
+{% load bootstrap_form_register_or_login %}
 
 
 
@@ -11,7 +11,8 @@
     <div class="row">
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
-            {% bootstrap_form form=form method='post' action='' %}
+            {% bootstrap_form_register_or_login form=form method='post' action='' %}
+
         </div>
 
         <div class="col-lg-3"></div>

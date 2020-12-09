@@ -7,3 +7,5 @@ class RestaurantCreateForm(forms.Form):
     class Meta:
         model = Restaurants
         fields = '__all__'
+
+

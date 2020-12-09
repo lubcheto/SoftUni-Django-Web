@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -13,14 +14,19 @@ from accounts.models import UserProfile
 #     choice5 = models.CharField(max_length=30, default='')
 
 
-class Restaurants(models.Model):
-    name = models.CharField(max_length=30)
+class Restaurants(UserProfile):
+    restaurant_name = models.CharField(max_length=30)
     description = models.CharField(max_length=250, default="")
-    image = models.ImageField(upload_to='public/restaurants/', storage="")
+    # user = models.OneToOneField(User, on_delete=models.CASCADE)
+    #profile_picture = models.ImageField(upload_to='public/restaurants/', storage="")
+    # balance = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    # amount_of_sale = models.DecimalField(max_digits=10, decimal_places=2,default=0)
 
-    # category = models.ManyToManyField(CategoryChoices)
     def __str__(self):
-        return f'{self.id};{self.name}'
+        return f'{self.id}'
+
+
+
 
 # class LikeRestaurant(models.Model):
 #     pet = models.ForeignKey(Restaurants, on_delete=models.CASCADE)

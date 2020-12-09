@@ -27,6 +27,6 @@ class MealsListView(ListView):
 
 class MealsCreateView(CreateView):
     model = RestaurantMeals
-    fields = '__all__'
+    fields = ['meal_name','type','price','picture']
     template_name = 'meals/meals-create.html'
     success_url = reverse_lazy('meals list')

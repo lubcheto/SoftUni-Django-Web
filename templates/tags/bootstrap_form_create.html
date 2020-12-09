@@ -1,0 +1,10 @@
+
+
+
+
+<form action="{{ action }}" method="{{ method }}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <br>
+    <button class = 'btn btn-success'>Create</button>
+</form>

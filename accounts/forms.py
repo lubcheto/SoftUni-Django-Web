@@ -1,15 +1,20 @@
-
+from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+from restaurants.models import Restaurants
+
 
 class RegisterForm(UserCreationForm):
+    CHOICES = [('1', 'Restaurant'), ('2', 'Buyer')]
+    choice_field = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
+
     class Meta:
         model = User
-        fields = ['username','password1','password2',]
+        fields = ['username', 'password1', 'password2']
 
 
-# class ProfileForm(forms.ModelForm):
-#     class Meta:
-#         model = UserProfile
-#         exclude = ('balance','amount_of_purchases')
+class RestaurantEditForm(forms.ModelForm):
+    class Meta:
+        model = Restaurants
+        fields = ['restaurant_name', 'description', 'profile_picture']

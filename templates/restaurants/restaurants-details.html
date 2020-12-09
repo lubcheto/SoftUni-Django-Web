@@ -1,0 +1,80 @@
+{% extends 'shared/base.html' %}
+{% load bootstrap_form_register_or_login %}
+{% load label_with_classes %}
+
+
+{% load static %}
+{% block site_content %}
+
+    <div class="container">
+
+        <!-- Portfolio Item Heading -->
+        <h1 class="my-4">Welcome to {{ restaurant.restaurant_name }}
+        </h1>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="{{ restaurant.profile_picture.url }}" style="width: 60%" alt="img">
+            </div>
+            <div class="col-md-4">
+                <h3 class="my-3">About Us</h3>
+                <p>{{ restaurant.description }}</p>
+                <h3 class="my-3">Additional Details</h3>
+                <ul>
+                    <li>Lorem Ipsum</li>
+                    <li>Dolor Sit Amet</li>
+                    <li>Consectetur</li>
+                    <li>Adipiscing Elit</li>
+                </ul>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    {% if can_edit %}
+                        <div class="container">
+                            <ul>
+                                <br>
+                                <a href="{% url 'meals create'%}" class="btn btn-primary">Submit new meal</a>
+                                </br>
+                                <br>
+                                <button class="btn btn-success">Edit submitted meal</button>
+                                </br>
+                                <br>
+                                <button class="btn btn-danger">Delete submitted meal</button>
+                                </br>
+                                <br>
+                                <a href="{% url 'restaurants edit' restaurant.id %}" class="btn btn-primary">Edit
+                                    profile</a>
+                                </br>
+                                <br>
+                                <a href="{% url 'restaurants delete' restaurant.id %}" class="btn btn-danger">Delete
+                                    profile</a>
+                                </br>
+                                </br>
+                                <li>Your balance is: {{ user.userprofile.balance }} </li>
+                                </br>
+                                <li>You have made: {{ user.userprofile.sales_or_purchase }} transactions</li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Meals Row -->
+            <div class="row">
+                <h3 class="my-4">Currently offering</h3>
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 mb-4">
+                        <a href="#">
+                            <img class="img-fluid" src="" style="width: 60%" alt="ing">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+
+
+{% endblock %}
