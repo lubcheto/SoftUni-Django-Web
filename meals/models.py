@@ -20,11 +20,12 @@ class RestaurantMeals(models.Model):
     )
     meal_name = models.CharField(max_length=30, default='')
     type = models.CharField(max_length=10, choices=MEAL_TYPES, default=Breakfast)
-    creator = models.ForeignKey(Restaurants, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    picture = models.ImageField(upload_to='public/meals/', storage="",blank=True)
+    picture = models.ImageField(upload_to='public/meals/', storage="",default='public\defaults/default_meal.png')
     is_eatable = True
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    creator = models.ForeignKey(Restaurants, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.id} ;{self.meal_name} ;{self.type} ;{self.price}'

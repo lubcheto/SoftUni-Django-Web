@@ -10,6 +10,8 @@ class UserProfile(models.Model):
     sales_or_purchase = models.DecimalField(max_digits=10, decimal_places=2,default=0)
     is_restaurant = models.BooleanField(default=False)
 
+
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 

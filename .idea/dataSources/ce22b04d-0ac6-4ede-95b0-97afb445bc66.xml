@@ -35,14 +35,14 @@
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="22" parent="6" name="balance">
+    <column id="22" parent="6" name="profile_picture">
       <Position>2</Position>
-      <DataType>decimal|0s</DataType>
+      <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="23" parent="6" name="user_id">
+    <column id="23" parent="6" name="balance">
       <Position>3</Position>
-      <DataType>integer|0s</DataType>
+      <DataType>decimal|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="24" parent="6" name="sales_or_purchase">
@@ -55,9 +55,9 @@
       <DataType>bool|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="26" parent="6" name="profile_picture">
+    <column id="26" parent="6" name="user_id">
       <Position>6</Position>
-      <DataType>varchar(100)|0s</DataType>
+      <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <index id="27" parent="6" name="sqlite_autoindex_accounts_userprofile_1">
@@ -531,19 +531,19 @@ model</ColNames>
       <DataType>decimal|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="119" parent="17" name="picture">
+    <column id="119" parent="17" name="timestamp">
       <Position>5</Position>
-      <DataType>varchar(100)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="120" parent="17" name="timestamp">
-      <Position>6</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="121" parent="17" name="creator_id">
-      <Position>7</Position>
+    <column id="120" parent="17" name="creator_id">
+      <Position>6</Position>
       <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="121" parent="17" name="picture">
+      <Position>7</Position>
+      <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <index id="122" parent="17" name="meals_restaurantmeals_creator_id_06f8d2f8">
@@ -566,14 +566,14 @@ model</ColNames>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="126" parent="18" name="description">
+    <column id="126" parent="18" name="restaurant_name">
       <Position>2</Position>
-      <DataType>varchar(250)|0s</DataType>
+      <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="127" parent="18" name="restaurant_name">
+    <column id="127" parent="18" name="description">
       <Position>3</Position>
-      <DataType>varchar(30)|0s</DataType>
+      <DataType>varchar(250)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <key id="128" parent="18">

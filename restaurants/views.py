@@ -1,8 +1,12 @@
 # Create your views here.
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 from accounts.forms import RestaurantEditForm
+from accounts.models import UserProfile
+from meals.models import RestaurantMeals
 from restaurants.models import Restaurants
 
 
@@ -34,31 +38,48 @@ class RestaurantsCreateView(CreateView):
 
 
 
-class RestaurantsDetailsView(DetailView):  # requires PK
+class RestaurantsDetailsView(DetailView):
     model = Restaurants
     template_name = 'restaurants/restaurants-details.html'
-    context_object_name = 'restaurant'  # promenqme naming of the variable from object to pet like in listview
+    context_object_name = 'restaurant'
+
 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['can_edit'] = (self.request.user.id == self.object.user_id)
         context['can_delete'] = (self.request.user.id == self.object.user_id)
+        context['created_meals'] = self.request.user.userprofile.restaurants.restaurantmeals_set.all()
 
         return context
 
 
-class RestaurantEditView(UpdateView):
+
+
+
+class RestaurantEditView(LoginRequiredMixin,UpdateView):
     model = Restaurants
     form_class = RestaurantEditForm
     template_name = 'restaurants/restaurants-edit.html'
     success_url = f'/restaurants/list/'
 
 
-class RestaurantDeleteView(DeleteView):
-    model = Restaurants
+class RestaurantDeleteView(LoginRequiredMixin,DeleteView):
+    model = UserProfile
     template_name = 'restaurants/restaurants-delete.html'
     success_url = f'/restaurants/list/'
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.user == request.user:
+            request.user.delete()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            raise Http404
+
+
+
+
 
 
 

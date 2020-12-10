@@ -1,14 +1,20 @@
 
 
 
-
 <form action="{{ action }}" method="{{ method }}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
     <br>
     <button class='btn btn-success'>Edit</button>
 
-    <div class = 'pull-right'>
+
+
+
+    <div class='pull-right'>
         <a class="btn btn-primary" href="javascript:history.back()">Go back</a>
     </div>
+
+
 </form>
+
+

@@ -5,8 +5,28 @@
     background-color: brown;
 }
 
-body, html {
-    height: 100%;
+/*body, html {*/
+/*    height: 100%;*/
+/*}*/
+
+html {
+    position: relative;
+    min-height: 100%;
+
+
+}
+
+body {
+    margin-bottom: 100px;
+    min-height: 100%;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: brown;
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -29,15 +49,15 @@ body, html {
 }
 
 /* Set black background color, white text and some padding */
-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 60px;
-    background-color: transparent;
-    border-top: 3px solid #333333;
-}
+/*footer {*/
+/*    position: bottom;*/
+/*    bottom: 0;*/
+/*    width: 100%;*/
+/*    !* Set the fixed height of the footer here *!*/
+/*    height: 60px;*/
+/*    background-color: brown;*/
+/*    border-top: 3px solid #333333;*/
+/*}*/
 
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 767px) {

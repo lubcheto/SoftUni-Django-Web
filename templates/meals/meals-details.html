@@ -1,0 +1,26 @@
+{% extends 'shared/base.html' %}
+{% load bootstrap_form_edit_delete %}
+
+{% load label_with_classes %}
+
+
+{% load static %}
+{% block site_content %}
+
+
+    <h1 class="text-center">Edit your meal information</h1>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            {% bootstrap_form_edit_delete form=form method='post' action='' %}
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+
+
+    <div class='col-md-8 center-block'>
+        <a class="btn btn-danger" href="{% url 'meals delete' restaurantmeals.id %}">Delete</a>
+    </div>
+
+
+{% endblock %}
