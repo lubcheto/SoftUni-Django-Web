@@ -1,0 +1,91 @@
+{% extends 'shared/base.html' %}
+{% load bootstrap_form_register_or_login %}
+{% load label_with_classes %}
+
+
+{% load static %}
+{% block site_content %}
+
+    <div class="container">
+
+        <!-- Portfolio Item Heading -->
+        <h1 class="my-4">Welcome {{ account.user.username }}
+        </h1>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="{{ account.profile_picture.url }}" style="width: 60%" alt="img">
+            </div>
+            <div class="col-md-4">
+                <h3 class="my-3">About Us</h3>
+                <p></p>
+                <h3 class="my-3">Additional Details</h3>
+                <ul>
+                    <li>Lorem Ipsum</li>
+                    <li>Dolor Sit Amet</li>
+                    <li>Consectetur</li>
+                    <li>Adipiscing Elit</li>
+                </ul>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    {% if can_edit %}
+                        <div class="container">
+                            <ul>
+                                <br>
+                                { a=5 }
+                                <a href="{% url 'account edit' account.pk %}" class="btn btn-primary">Add
+                                    information/Edit
+                                    profile</a>
+                                </br>
+                                <br>
+                                <a href="{% url 'account delete' account.id %}" class="btn btn-danger">Delete
+                                    profile</a>
+                                </br>
+                                </br>
+                                <li>Your balance is:</li>
+                                </br>
+
+                                </br>
+                                <li>Your balance is: {{ account.balance }} </li>
+                                </br>
+                                <li>You have made: {{ accoubt.sales_or_purchase }} transactions</li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Meals Row -->
+            {a=5}
+            <div class="row">
+                <h3 class="my-4">Purchased meals</h3>
+{#                <div class="row">#}
+{#                    {% for meal in created_meals %}#}
+{#                        <div class="col-md-3 col-sm-6 mb-4">#}
+{#                            <a href="{% url 'meals details' meal.pk %}">#}
+{#                                <img class="img-fluid" src="{{ meal.picture.url }}" style="width: 60%" alt="img">#}
+{##}
+{#                            </a>#}
+{#                            <div class="card-body">#}
+{#                                <h5 class="card-title">{{ meal.meal_name }} {{ meal.type }}</h5>#}
+{#                                <p class="card-text">{{ meal.price }}</p>#}
+{#                                <p class="card-text">{{ meal.timestamp|time }}</p>#}
+{##}
+{##}
+                                {#                                <a href="{% url 'pet details' pet.id %}" class="btn btn-primary">See details</a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    {% empty %}#}
+{#                        <a href="{% url 'meals create' %}">You don't have any meals added</a>#}
+{#                    {% endfor %}#}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+
+
+{% endblock %}

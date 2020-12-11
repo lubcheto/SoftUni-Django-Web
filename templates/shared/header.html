@@ -10,10 +10,6 @@
             <li class="">
                 <a href="{% url 'restaurants list' %}">Restaurant List</a>
             </li>
-            <li class="">
-                <a href="{% url 'restaurants create' %}">Restaurant Create</a>
-            </li>
-
 
             <li class="">
                 <a href="{% url 'meals list' %}">Meals List</a>
@@ -23,15 +19,10 @@
                 <a href="{% url 'meals create' %}">Meals Create</a>
             </li>
 
-
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Browse meals <span
-                    class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Page 1-1</a></li>
-                    <li><a href="#">Page 1-2</a></li>
-                    <li><a href="#">Page 1-3</a></li>
-                </ul>
+            <li class="">
+                <a href="{% url 'browse meals' %}">Browse Meals</a>
             </li>
+
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Surprise meal <span
                     class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -49,13 +40,14 @@
                 <li><a href="{% url 'register user' %}"><span class="glyphicon glyphicon-log-in"></span> Register</a>
                 </li>
                 <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
             {% else %}
                 {% if user.userprofile.is_restaurant %}
 
                     <li><a href="{% url 'restaurants details' user.userprofile.id %}"><span
                             class="glyphicon glyphicon glyphicon-user"></span> {{ user.username }}</a></li>
                 {% else %}
-                    <li><a href="{% url 'login' %}"><span
+                    <li><a href="{% url 'account details' user.userprofile.id %}"><span
                             class="glyphicon glyphicon glyphicon-user"></span> {{ user.username }}</a></li>
                 {% endif %}
 

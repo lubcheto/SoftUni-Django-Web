@@ -27,8 +27,8 @@ class RestaurantMeals(models.Model):
 
     creator = models.ForeignKey(Restaurants, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f'{self.id} ;{self.meal_name} ;{self.type} ;{self.price}'
+    # def __str__(self):
+    #     return f'{self.id} ;{self.meal_name} ;{self.type} ;{self.price}'
 
 
 

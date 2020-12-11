@@ -1,0 +1,36 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+
+<div class="row">
+    <h3 class="my-4">Currently offering</h3>
+    {{ a }}
+    <form method='GET'>
+        {{ filter_lib.form }}
+        <input class="button" type='submit' value="filter_lib">
+    </form>
+
+    <div class="row">
+        {% for meal in all_meals %}
+            <div class="col-md-3 col-sm-6 mb-4">
+                <img src="{{ meal.picture.url }}" class="card-img-top"
+                     style="width:100%" alt="Image">
+                <div class="card-body">
+                    <h5 class="card-title">NAME: {{ meal.meal_name }} </h5>
+                    <p class="card-text">PRICE: {{ meal.price }}</p>
+                    <p class="card-text">TYPE: {{ meal.type }}</p>
+                    {% if not is_restaurant %}
+                        <a href="" class="btn btn-primary">Add to card</a>
+                    {% endif %}
+                    {% if meal.creator.user.id == request.user.id %}
+                        <a href="{% url 'meals details' meal.pk %}" class="btn btn-primary">Edit or delete</a>
+                    {% endif %}
+                </div>
+
+            </div>
+            </div>
+        {% endfor %}
+    <div>
+        {% include 'shared/pagination.html' %}
+    </div>
+</div>

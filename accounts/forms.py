@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+from accounts.models import UserProfile
 from restaurants.models import Restaurants
 
 
@@ -18,3 +19,10 @@ class RestaurantEditForm(forms.ModelForm):
     class Meta:
         model = Restaurants
         fields = ['restaurant_name', 'description', 'profile_picture']
+
+
+
+class AccountEditForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['profile_picture','balance','is_restaurant']

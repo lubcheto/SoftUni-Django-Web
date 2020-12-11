@@ -36,16 +36,12 @@
                         <div class="container">
                             <ul>
                                 <br>
-                                <a href="{% url 'meals create' %}" class="btn btn-primary">Submit new meal</a>
+                                <a href="{% url 'meals create' %}" class="btn btn-success">Submit new meal</a>
                                 </br>
+
                                 <br>
-                                <button class="btn btn-success">Edit submitted meal</button>
-                                </br>
-                                <br>
-                                <button class="btn btn-danger">Delete submitted meal</button>
-                                </br>
-                                <br>
-                                <a href="{% url 'restaurants edit' restaurant.id %}" class="btn btn-primary">Add information/Edit
+                                <a href="{% url 'restaurants edit' restaurant.id %}" class="btn btn-primary">Add
+                                    information/Edit
                                     profile</a>
                                 </br>
                                 <br>
@@ -53,7 +49,7 @@
                                     profile</a>
                                 </br>
                                 </br>
-                                <li>Your balance is:  </li>
+                                <li>Your balance is:</li>
                                 </br>
 
                                 </br>
@@ -66,29 +62,45 @@
                 </div>
             </div>
             <!-- Meals Row -->
-            {a=5}
+
             <div class="row">
                 <h3 class="my-4">Currently offering</h3>
                 <div class="row">
                     {% for meal in created_meals %}
                         <div class="col-md-3 col-sm-6 mb-4">
-                            <a href="{% url 'meals details' meal.pk %}">
-                                <img class="img-fluid" src="{{ meal.picture.url }}" style="width: 60%" alt="img">
-
+                            {% if can_edit %}
+                                <a href="{% url 'meals details' meal.pk %}">
+                            {% endif %}
+                            <img class="img-fluid" src="{{ meal.picture.url }}" style="width: 60%" alt="img">
                             </a>
                             <div class="card-body">
-                                <h5 class="card-title">{{ meal.meal_name }} {{ meal.type }}</h5>
-                                <p class="card-text">{{ meal.price }}</p>
-                                <p class="card-text">{{ meal.timestamp|time }}</p>
+                                <h5 class="card-title">Meal :{{ meal.meal_name }}</h5>
+                                <h5 class="card-title">Type:{{ meal.type }}</h5>
+                                <h5 class="card-text">Price:{{ meal.price }}</h5>
+                                <h5 class="card-text">Uploaded:{{ meal.timestamp }}</h5>
 
+                                {% if can_edit %}
+                                    <a href="{% url 'meals details' meal.pk %}" class="btn btn-primary">Edit or
+                                        delete</a>
+                                {% else %}
+                                    {% if not is_restaurant %}
+                                        <a href="" class="btn btn-primary">Add to card</a>
+                                    {% endif %}
+                                {% endif %}
 
-                                {#                                <a href="{% url 'pet details' pet.id %}" class="btn btn-primary">See details</a>#}
                             </div>
                         </div>
                     {% empty %}
-                        <a href="">You don't have any meals added</a>
+                        {% if can_edit %}
+                            <a href="{% url 'meals create' %}">You don't have any meals added</a>
+                        {% endif %}
                     {% endfor %}
+                    {#                        {% include 'shared/pagination.html' %}#}
+
                 </div>
+                {#            </div>#}
+                {#            {% include 'meals/meals-list-clean.html' with obj=created_meals is_restaurant=is_restaurant creator=meal.creator.user.id current_user=current_user %}#}
+                {#        </div>#}
             </div>
         </div>
     </div>

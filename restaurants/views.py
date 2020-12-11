@@ -33,9 +33,9 @@ class RestaurantsCreateView(CreateView):
     model = Restaurants
     fields = ['restaurant_name', 'description','profile_picture']
     template_name = 'restaurants/restaurants-create.html'
-    success_url = reverse_lazy('restaurants list')
 
-
+    def get_success_url(self):
+        return reverse_lazy('restaurants details', kwargs={'pk': self.request.user.userprofile.pk})
 
 
 class RestaurantsDetailsView(DetailView):
@@ -49,10 +49,12 @@ class RestaurantsDetailsView(DetailView):
         context = super().get_context_data(**kwargs)
         context['can_edit'] = (self.request.user.id == self.object.user_id)
         context['can_delete'] = (self.request.user.id == self.object.user_id)
-        context['created_meals'] = self.request.user.userprofile.restaurants.restaurantmeals_set.all()
+        context['owner'] = (self.request.user.id == self.object.user_id)
+        context['created_meals'] = self.object.restaurants.restaurantmeals_set.all()
 
+        if self.request.user.is_authenticated:
+            context['is_restaurant'] = self.request.user.userprofile.is_restaurant
         return context
-
 
 
 
@@ -61,7 +63,11 @@ class RestaurantEditView(LoginRequiredMixin,UpdateView):
     model = Restaurants
     form_class = RestaurantEditForm
     template_name = 'restaurants/restaurants-edit.html'
-    success_url = f'/restaurants/list/'
+
+
+    def get_success_url(self):
+        return reverse_lazy('restaurants details', kwargs={'pk': self.request.user.userprofile.pk})
+
 
 
 class RestaurantDeleteView(LoginRequiredMixin,DeleteView):
@@ -76,6 +82,11 @@ class RestaurantDeleteView(LoginRequiredMixin,DeleteView):
             return HttpResponseRedirect(self.get_success_url())
         else:
             raise Http404
+
+
+def HeaderFilter(request):
+    title_contains_query = request.GET.get('title_contains')
+
 
 
 

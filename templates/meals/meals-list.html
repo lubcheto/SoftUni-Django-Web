@@ -4,11 +4,17 @@
 
 {% block site_content %}
     <h1>MEALS LIST</h1>
+
+    <form method='GET'>
+        <input type='text' name='q' value='{{ request.GET.q }}'>
+        <input class="button" type='submit' value="Search by name">
+    </form>
+
     <div class='container' style='padding-top: 10px'>
         {% for meal in meals %}
+            {#            {% for meal in queryset %}#}
             <div class="col-lg-4">
-
-                <div class="card card-outline-primary mb-3 text-center" style="width: 100%;">
+                <div class="card card-outline-primary mb-3 text-center" style="width: 100%; padding-top: 20px">
 
                     <img src="{{ meal.picture.url }}" class="card-img-top"
                          style="width:100%" alt="Image">
@@ -16,8 +22,12 @@
                         <h5 class="card-title">NAME: {{ meal.meal_name }} </h5>
                         <p class="card-text">PRICE: {{ meal.price }}</p>
                         <p class="card-text">TYPE: {{ meal.type }}</p>
-
-
+                        {% if not is_restaurant %}
+                            <a href="" class="btn btn-primary">Add to card</a>
+                        {% endif %}
+                        {% if meal.creator.user.id == current_user %}
+                            <a href="{% url 'meals details' meal.pk %}" class="btn btn-primary">Edit or delete</a>
+                        {% endif %}
                     </div>
 
                 </div>
@@ -26,25 +36,31 @@
         {% endfor %}
     </div>
 
+
     <nav aria-label="Page navigation">
 
-        <ul class="pagination pg-blue"  style = "position: absolute;
+        <ul class="pagination pg-blue" style="position: absolute;
   width: 50%;
   bottom: 30px;
   ">
             {% if page_obj.has_previous %}
-                <li class="page-item"><a href="?page={{ page_obj.previous_page_number }}" class="page-link">Previous</a>
+                <li class="page-item"><a href="?page={{ page_obj.previous_page_number }}"
+                                         class="page-link">Previous</a>
                 </li>
-                <li class="page-item"><a href="?page={{ page_obj.previous_page_number }}" class="page-link">{{ page_obj.previous_page_number }}</a></li>
+                <li class="page-item"><a href="?page={{ page_obj.previous_page_number }}"
+                                         class="page-link">{{ page_obj.previous_page_number }}</a></li>
             {% endif %}
 
             <li class="page-item"><a class="page-link">{{ page_obj.number }}</a></li>
             {% if page_obj.has_next %}
-                <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link">{{ page_obj.next_page_number }}</a></li>
-                <li  class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link">Next</a></li>
+                <li class="page-item"><a href="?page={{ page_obj.next_page_number }}"
+                                         class="page-link">{{ page_obj.next_page_number }}</a></li>
+                <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link">Next</a>
+                </li>
                 </ul>
             {% endif %}
     </nav>
+
 
 
 {% endblock %}
