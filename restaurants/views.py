@@ -50,7 +50,7 @@ class RestaurantsDetailsView(DetailView):
         context['can_edit'] = (self.request.user.id == self.object.user_id)
         context['can_delete'] = (self.request.user.id == self.object.user_id)
         context['owner'] = (self.request.user.id == self.object.user_id)
-        context['created_meals'] = self.object.restaurants.restaurantmeals_set.all()
+        context['created_meals'] = self.object.restaurants.restaurantmeals_set.filter(is_eatable=True)
 
         if self.request.user.is_authenticated:
             context['is_restaurant'] = self.request.user.userprofile.is_restaurant

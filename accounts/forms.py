@@ -25,4 +25,4 @@ class RestaurantEditForm(forms.ModelForm):
 class AccountEditForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['profile_picture','balance','is_restaurant']
+        fields = ['profile_picture','balance',]

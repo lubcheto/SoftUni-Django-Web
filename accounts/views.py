@@ -25,6 +25,7 @@ class RegisterView(CreateView):
         if form.cleaned_data.get('choice_field')=="1":
             profile = Restaurants(user=user,)
             profile.is_restaurant=True
+
         else:
             profile = UserProfile(user=user, )
         user.save()

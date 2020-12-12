@@ -1,0 +1,7 @@
+1. Add meal quantities
+    - during creation
+2. Extend Cart with variable quantities
+3. Slugify links
+4. Auth groups and auth_group_permissions
+
+

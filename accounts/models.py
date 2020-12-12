@@ -14,8 +14,6 @@ class UserProfile(models.Model):
         MinValueValidator(0),])
     is_restaurant = models.BooleanField(default=False)
 
-
-
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 

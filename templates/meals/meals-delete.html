@@ -14,7 +14,7 @@
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
             <form method="post">{% csrf_token %}
-                <h1 class="text-center">Are you sure you want to delete: </h1>
+                <h1 class="text-center">Are you sure you want to delete: {{ object.meal_name }}</h1>
 
                 <h2 class="text-center">{{ restaurants.restaurant_name }} ?</h2>
 

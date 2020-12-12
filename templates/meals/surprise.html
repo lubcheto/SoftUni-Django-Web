@@ -1,0 +1,30 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+
+{% block site_content %}
+
+
+    <div class='container' style='padding-top: 10px'>
+            <div class="col-lg-4">
+                <div class="card card-outline-primary mb-3 text-center" style="width: 100%; padding-top: 20px">
+
+                    <img src="{{ random_meal.picture.url }}" class="card-img-top"
+                         style="width:100%" alt="Image">
+                    <div class="card-body">
+                        <h5 class="card-title">NAME: {{ random_meal.meal_name }} </h5>
+                        <p class="card-text">PRICE: {{ random_meal.price }}</p>
+                        <p class="card-text">TYPE: {{ random_meal.type }}</p>
+                        <p class="card-text">ID: {{ random_meal.id }}</p>
+                        {% if not is_restaurant and  user.is_authenticated %}
+                            <a href="{% url 'update cart' random_meal.id%}" class="btn btn-primary">Add to card</a>
+                        {% endif %}
+                        {% if random_meal.creator.user.id == request.user.pk %}
+                            <a href="{% url 'meals details' random_meal.pk %}" class="btn btn-primary">Edit or delete</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+    </div>
+
+{% endblock %}

@@ -12,7 +12,7 @@
 
     <div class='container' style='padding-top: 10px'>
         {% for meal in meals %}
-            {#            {% for meal in queryset %}#}
+
             <div class="col-lg-4">
                 <div class="card card-outline-primary mb-3 text-center" style="width: 100%; padding-top: 20px">
 
@@ -22,8 +22,8 @@
                         <h5 class="card-title">NAME: {{ meal.meal_name }} </h5>
                         <p class="card-text">PRICE: {{ meal.price }}</p>
                         <p class="card-text">TYPE: {{ meal.type }}</p>
-                        {% if not is_restaurant %}
-                            <a href="" class="btn btn-primary">Add to card</a>
+                        {% if not is_restaurant and  user.is_authenticated %}
+                            <a href="{% url 'update cart' meal.id%}" class="btn btn-primary">Add to card</a>
                         {% endif %}
                         {% if meal.creator.user.id == current_user %}
                             <a href="{% url 'meals details' meal.pk %}" class="btn btn-primary">Edit or delete</a>

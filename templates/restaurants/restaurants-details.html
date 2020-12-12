@@ -48,9 +48,6 @@
                                 <a href="{% url 'restaurants delete' restaurant.id %}" class="btn btn-danger">Delete
                                     profile</a>
                                 </br>
-                                </br>
-                                <li>Your balance is:</li>
-                                </br>
 
                                 </br>
                                 <li>Your balance is: {{ user.userprofile.balance }} </li>
@@ -83,8 +80,8 @@
                                     <a href="{% url 'meals details' meal.pk %}" class="btn btn-primary">Edit or
                                         delete</a>
                                 {% else %}
-                                    {% if not is_restaurant %}
-                                        <a href="" class="btn btn-primary">Add to card</a>
+                                    {% if not is_restaurant and  user.is_authenticated%}
+                                        <a href="{% url 'update cart' meal.id%}" class="btn btn-primary">Add to card</a>
                                     {% endif %}
                                 {% endif %}
 
@@ -95,12 +92,7 @@
                             <a href="{% url 'meals create' %}">You don't have any meals added</a>
                         {% endif %}
                     {% endfor %}
-                    {#                        {% include 'shared/pagination.html' %}#}
 
-                </div>
-                {#            </div>#}
-                {#            {% include 'meals/meals-list-clean.html' with obj=created_meals is_restaurant=is_restaurant creator=meal.creator.user.id current_user=current_user %}#}
-                {#        </div>#}
             </div>
         </div>
     </div>

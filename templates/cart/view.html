@@ -1,0 +1,155 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body {
+        font-family: Arial;
+        font-size: 17px;
+        padding: 8px;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .row {
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        -ms-flex-wrap: wrap; /* IE10 */
+        flex-wrap: wrap;
+        margin: 0 -16px;
+    }
+
+    .col-25 {
+        -ms-flex: 25%; /* IE10 */
+        flex: 25%;
+    }
+
+    .col-50 {
+        -ms-flex: 50%; /* IE10 */
+        flex: 50%;
+    }
+
+    .col-75 {
+        -ms-flex: 75%; /* IE10 */
+        flex: 75%;
+    }
+
+    .col-25,
+    .col-50,
+    .col-75 {
+        padding: 0 16px;
+    }
+
+    .container-card {
+        background-color: #f2f2f2;
+        padding: 50px 20px 50px 50px;
+        border: 1px solid lightgrey;
+        border-radius: 3px;
+    }
+
+    input[type=text] {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    label {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .icon-container {
+        margin-bottom: 20px;
+        padding: 7px 0;
+        font-size: 24px;
+    }
+
+    .btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        width: 100%;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 17px;
+    }
+
+    .btn:hover {
+        background-color: #45a049;
+    }
+
+    a {
+        color: #2196F3;
+    }
+
+    hr {
+        border: 1px solid lightgrey;
+    }
+
+    span.price {
+        float: right;
+        color: grey;
+    }
+
+    /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+    @media (max-width: 800px) {
+        .row {
+            flex-direction: column-reverse;
+        }
+
+        .col-25 {
+            margin-bottom: 20px;
+        }
+    }
+</style>
+
+
+{% extends 'shared/base.html' %}
+
+{% block site_content %}
+    {% if empty %}
+        <h1 style="text-align:center">{{ empty_message }}</h1>
+    {% else %}
+        <p><br></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <div class="container-card col-sm-8 col-sm-offset-2" style='width:500px'>
+            <h4>Meals in cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i>
+                <b>{{ cart.products.all.count }}</b></span></h4>
+            {% for item in cart.products.all %}
+
+                <p>
+                    <a href="#">{{ item.meal_name }}</a>
+                    <span class="price">{{ item.price }} $</span>
+                    <br>
+                    <a href="{% url 'update cart' item.id %}" class="btn btn-danger">Remove </a>
+
+                </p>
+            {% endfor %}
+
+            <p>Total <span class="price" style="color:#000000"><b>{{ cart.total }} $</b></span></p>
+        {% if not_enough %}
+            <p>{{ error_message }}</p>
+            {% else %}
+            <p>{{ success_message }}</p>
+        {% endif %}
+            <p>Balance <span class="price" style="color:#000000"><b>{{ request.user.userprofile.balance }} $</b></span></p>
+            <p>
+                <a href="{% url 'checkout' cart.id %}" class="btn btn-danger">Checkout </a>
+                a=4
+            </p>
+
+        </div>
+    {% endif %}
+
+
+
+
+
+
+{% endblock %}
