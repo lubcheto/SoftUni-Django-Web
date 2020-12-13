@@ -22,9 +22,9 @@ class RegisterView(CreateView):
 
     def form_valid(self, form):
         user = form.save(commit=False)
-        if form.cleaned_data.get('choice_field')=="1":
-            profile = Restaurants(user=user,)
-            profile.is_restaurant=True
+        if form.cleaned_data.get('choice_field') == "1":
+            profile = Restaurants(user=user, )
+            profile.is_restaurant = True
 
         else:
             profile = UserProfile(user=user, )
@@ -44,11 +44,8 @@ class RegisterView(CreateView):
             return reverse_lazy('account details', kwargs={'pk': self.object.userprofile.id})
 
 
-
 class LoginViewCustom(LoginView):
     template_name = 'accounts/login.html'
-
-
 
 
 @login_required
@@ -69,7 +66,8 @@ class AccountDetailsView(DetailView):
 
         return context
 
-class AccountEditView(LoginRequiredMixin,UpdateView):
+
+class AccountEditView(LoginRequiredMixin, UpdateView):
     model = UserProfile
     form_class = AccountEditForm
     template_name = 'accounts/account-edit.html'
@@ -78,7 +76,8 @@ class AccountEditView(LoginRequiredMixin,UpdateView):
     def get_success_url(self):
         return reverse_lazy('account details', kwargs={'pk': self.request.user.userprofile.pk})
 
-class AccountDeleteView(LoginRequiredMixin,DeleteView):
+
+class AccountDeleteView(LoginRequiredMixin, DeleteView):
     model = UserProfile
     template_name = 'accounts/accounts-delete.html'
     success_url = f'/restaurants/list/'
@@ -90,8 +89,3 @@ class AccountDeleteView(LoginRequiredMixin,DeleteView):
             return HttpResponseRedirect(self.get_success_url())
         else:
             raise Http404
-
-
-
-
-

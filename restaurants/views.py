@@ -1,8 +1,9 @@
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, FormView
 
 from accounts.forms import RestaurantEditForm
 from accounts.models import UserProfile
@@ -28,10 +29,9 @@ class RestaurantsListView(ListView):
         return context
 
 
-
 class RestaurantsCreateView(CreateView):
     model = Restaurants
-    fields = ['restaurant_name', 'description','profile_picture']
+    fields = ['restaurant_name', 'description', 'profile_picture']
     template_name = 'restaurants/restaurants-create.html'
 
     def get_success_url(self):
@@ -42,8 +42,6 @@ class RestaurantsDetailsView(DetailView):
     model = Restaurants
     template_name = 'restaurants/restaurants-details.html'
     context_object_name = 'restaurant'
-
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -57,20 +55,19 @@ class RestaurantsDetailsView(DetailView):
         return context
 
 
-
-
-class RestaurantEditView(LoginRequiredMixin,UpdateView):
+class RestaurantEditView(LoginRequiredMixin, UpdateView):
     model = Restaurants
     form_class = RestaurantEditForm
     template_name = 'restaurants/restaurants-edit.html'
+
+
 
 
     def get_success_url(self):
         return reverse_lazy('restaurants details', kwargs={'pk': self.request.user.userprofile.pk})
 
 
-
-class RestaurantDeleteView(LoginRequiredMixin,DeleteView):
+class RestaurantDeleteView(LoginRequiredMixin, DeleteView):
     model = UserProfile
     template_name = 'restaurants/restaurants-delete.html'
     success_url = f'/restaurants/list/'
@@ -86,13 +83,3 @@ class RestaurantDeleteView(LoginRequiredMixin,DeleteView):
 
 def HeaderFilter(request):
     title_contains_query = request.GET.get('title_contains')
-
-
-
-
-
-
-
-
-
-

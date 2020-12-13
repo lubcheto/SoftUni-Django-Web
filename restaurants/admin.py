@@ -37,9 +37,12 @@ class UserProfileAdmin(admin.ModelAdmin):
     search_fields = ("user", "sales_or_purchase")
 
 
+
+@admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
-    class Meta:
-        model = Cart
+    list_display = ("id", 'total', )
+    list_filter = ('id',)
+    search_fields = ("id",)
 
 
-admin.site.register(Cart, CartAdmin)
+

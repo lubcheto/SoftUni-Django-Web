@@ -12,3 +12,8 @@ class Restaurants(UserProfile):
 
     def __str__(self):
         return self.restaurant_name
+
+
+
+
+

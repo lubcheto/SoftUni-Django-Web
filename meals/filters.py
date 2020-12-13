@@ -7,4 +7,4 @@ class FilterMeals(django_filters.FilterSet):
     class Meta:
         model = RestaurantMeals
         fields = '__all__'
-        exclude = ['picture','timestamp']
+        exclude = ['picture','timestamp','is_eatable']
